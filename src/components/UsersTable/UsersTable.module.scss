@@ -1,0 +1,27 @@
+.container{
+    margin-top: 15px;
+    width: 600px;
+}
+.table{
+    height: '500px';
+    tbody {
+        color: gray;
+    }
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    tr {
+        height: 35px;
+        border-bottom: 1px solid grey;
+    }
+    th {
+        border: 1px solid lightgray;
+    }
+    td, th {
+        width: 25%;
+    }
+}
+
+
+
+
