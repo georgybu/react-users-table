@@ -1,3 +1,4 @@
+
 export interface UserCredentials {
     email: string,
     firstName: string,
@@ -15,5 +16,6 @@ export interface UsersData {
 
 export interface TableColumn {
     fieldName: string
-    title: string
+    title: string,
+    isSortable?: boolean
 }

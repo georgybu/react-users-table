@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import UsersTable from "../../components/UsersTable/UsersTable";
-import { getUsersData, searchUsers } from "../../redux/actions/users.actions";
+import { getUsersData, searchUsers, sortUsers } from "../../redux/actions/users.actions";
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {
@@ -16,10 +16,15 @@ const HomePage = () => {
         dispatch(searchUsers(val)); 
     }, []);
 
+    const onSortHandler = (obj: {sortBy: string, sortDir: string}) => {
+        console.log(obj);
+        dispatch(sortUsers(obj))
+    }
+
    return (
        <div className={styles.container}>
            <SearchBar onSearch={onSearchChange} />
-           <UsersTable users={users}/>
+           <UsersTable users={users} onSort={onSortHandler}/>
        </div>
    )
 

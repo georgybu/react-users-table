@@ -1,9 +1,11 @@
 import { UsersData } from './../../interfaces/core.interfaces';
-import { SEARCH_USERS, SET_USERS_DATA } from "../constants/users.constants";
+import { SEARCH_USERS, SET_USERS_DATA, SORT_USERS } from "../constants/users.constants";
 
 const initialState = {
   users: [],
-  initialUsers: []
+  initialUsers: [],
+  sortBy: '',
+  sortDir: ''
 }
 
 const users = (state = initialState, action: any) => {
@@ -15,15 +17,41 @@ const users = (state = initialState, action: any) => {
            initialUsers: action.payload
         }
     case SEARCH_USERS:
-        const { query } = action.payload
+        const { query } = action.payload;
         const filteredUsers = query ? searchUsers(state.users, query) : state.initialUsers
         return {
             ...state,
             users: filteredUsers,
     }
+    case SORT_USERS:
+        const { sortData } = action.payload;
+        const sortedUsers = sortUsers(state.users, sortData);
+        return {
+            ...state,
+            users: sortedUsers,
+            sortDir: sortData.sortDir,
+            sortBy: sortData.sortBy
+        }
     default:
       return state
   }
+}
+
+function sortUsers(users: UsersData[], sortData: {sortBy: string, sortDir: string}) {
+    const sortedList = [...users];
+    const newOrder = sortData.sortDir;
+    const sortValue = (v1: any, v2: any) => {
+      if (sortData.sortBy === 'id') return v1.id - v2.id;
+      return (v1[sortData.sortBy] ?? '')
+        .toLowerCase()
+        .localeCompare((v2[sortData.sortBy] ?? '').toLowerCase())
+    }
+    if (newOrder === "ASC") {
+      sortedList.sort((a, b) => sortValue(a, b));
+    } else {
+      sortedList.sort((a, b) => sortValue(b, a));
+    }
+    return sortedList;
 }
 
 function searchUsers(users: UsersData[], query: string): UsersData[] {

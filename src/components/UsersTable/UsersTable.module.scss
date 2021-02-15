@@ -21,7 +21,12 @@ thead {
 table {
     width: 100%;
 }
-
+.arrow{
+    display: flex;
+    &:hover {
+        cursor: pointer;
+    }
+}
 
 
 

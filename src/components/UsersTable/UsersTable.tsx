@@ -2,12 +2,15 @@ import { useHistory } from "react-router-dom";
 import { TableColumn, UsersData } from "../../interfaces/core.interfaces";
 import columnsConfig from "./UsersTable.config";
 import styles from './UsersTable.module.scss';
+import arrUp from '../../assets/icons/arrowUp.png';
+import arrDown from '../../assets/icons/arrowDown.png';
 
 interface UsersTableProps {
-    users: UsersData[]
+    users: UsersData[],
+    onSort: (obj: {sortBy: string, sortDir: string}) => void;
 }
 
-const UsersTable = ({users}: UsersTableProps) => {
+const UsersTable = ({users, onSort}: UsersTableProps) => {
     const history = useHistory()
      
     const onRowClick = (user: UsersData) => {
@@ -17,13 +20,28 @@ const UsersTable = ({users}: UsersTableProps) => {
           })
     }
 
+    // const onSortHandler = (sortBy: string, sortDir: string) => {
+    //     console.log({sortBy, sortDir});
+    //     onSort({sortBy, sortDir});
+    // }
+
     return (
         <div className={styles.container}>
             <table className={styles.table}>
                 <thead>
                     <tr>
                     {columnsConfig.map((column: TableColumn, idx: number) => (
-                        <th key={idx}>{column.title}</th>
+                        <th key={idx}>
+                            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                <div>{column.title}</div>
+                                {column.isSortable && 
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    <div className={styles.arrow} onClick={() => onSort({sortBy: column.fieldName, sortDir: 'ASC'})}><img width={10} height={10} src={arrUp}/></div>
+                                    <div className={styles.arrow} onClick={() => onSort({sortBy: column.fieldName, sortDir: 'DESC'})}><img width={10} height={10} src={arrDown}/></div>
+                                </div>
+                                }
+                            </div>
+                        </th>
                     ))}
                     </tr>
                 </thead>

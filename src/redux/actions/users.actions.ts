@@ -1,5 +1,5 @@
 import { apiMap } from './../../config/api.map';
-import { SEARCH_USERS, SET_USERS_DATA } from "../constants/users.constants";
+import { SEARCH_USERS, SET_USERS_DATA, SORT_USERS } from "../constants/users.constants";
 import api from '../../utils/apiService';
 
 export const setUsersData = (data: any) => ({
@@ -23,5 +23,12 @@ export const searchUsers = (query: string) => ({
     type: SEARCH_USERS,
     payload: {
         query
+    },
+})
+
+export const sortUsers = (sortData: {sortBy: string, sortDir: string}) => ({
+    type: SORT_USERS,
+    payload: {
+        sortData
     },
 })
