@@ -1,23 +1,16 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { TableColumn, UsersData } from "../../interfaces/core.interfaces";
-import { getUsersData } from "../../redux/actions/users.actions";
 import columnsConfig from "./UsersTable.config";
 import styles from './UsersTable.module.scss';
 
-const UsersTable = () => {
-    const dispatch = useDispatch();
+interface UsersTableProps {
+    users: UsersData[]
+}
+
+const UsersTable = ({users}: UsersTableProps) => {
     const history = useHistory()
-    const {users} = useSelector((state: any) => state.users)
-    
-    useEffect(() => {
-        dispatch(getUsersData())
-    }, [])
-    console.log('users: ', users);
-    
+     
     const onRowClick = (user: UsersData) => {
-        console.log('onRowClick: ', user);
         history.push({
             pathname: `/edit/${user.id}`,
             state: { user: user }
@@ -34,14 +27,14 @@ const UsersTable = () => {
                     ))}
                     </tr>
                 </thead>
-                <tbody>
-                    {(users || []).map((user: any) => (
-                    <tr key={user.id} onClick={() => onRowClick(user)}>
-                        {columnsConfig.map((column: TableColumn, idx: number) => (
-                        <td key={idx}>{user[column.fieldName]}</td>
+                <tbody >
+                        {(users || []).map((user: any) => (
+                        <tr key={user.id} onClick={() => onRowClick(user)}>
+                            {columnsConfig.map((column: TableColumn, idx: number) => (
+                            <td key={idx}>{user[column.fieldName]}</td>
+                            ))}
+                        </tr>
                         ))}
-                    </tr>
-                    ))}
                 </tbody>
             </table>
         </div>

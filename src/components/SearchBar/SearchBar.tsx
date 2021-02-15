@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./SearchBar.module.scss";
+import styles from  "./SearchBar.module.scss";
 
 interface SearchbarProps {
   onSearch: (query: string) => void;
@@ -21,14 +21,14 @@ const SearchBar = ({ onSearch }: SearchbarProps) => {
   };
 
   return (
-    <div className="searchbar">
+    <div className={styles.searchbar}>
       <input
-        className="searchbar__input"
+        className={styles.searchbar__input}
         onChange={onInputChange}
         onKeyPress={handleKeyPress}
       />
       <button
-        className="submit-btn"
+        className={styles.submitBtn}
         onClick={() => onSearch && onSearch(tempQuery)}
       >
         Search

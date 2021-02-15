@@ -15,7 +15,10 @@ export const login = (data: UserCredentials) => (dispatch: any) => {
       url,
       data: data,
     }).then((res: any) => {
-        const token = res.data.token
-        dispatch(loginUser(token));
+        const token = res?.data?.token
+        if(token) {
+            localStorage.setItem('token', token);
+            dispatch(loginUser(token));
+        }
     }).catch(err => console.log(err))
 }

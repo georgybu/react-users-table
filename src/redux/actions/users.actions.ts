@@ -1,5 +1,5 @@
 import { apiMap } from './../../config/api.map';
-import { SET_USERS_DATA } from "../constants/users.constants";
+import { SEARCH_USERS, SET_USERS_DATA } from "../constants/users.constants";
 import api from '../../utils/apiService';
 
 export const setUsersData = (data: any) => ({
@@ -17,3 +17,11 @@ export const getUsersData = () => (dispatch: any) => {
         dispatch(setUsersData(data))
     }).catch(err => console.log(err))
 }
+
+
+export const searchUsers = (query: string) => ({
+    type: SEARCH_USERS,
+    payload: {
+        query
+    },
+})

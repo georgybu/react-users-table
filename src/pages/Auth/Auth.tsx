@@ -8,7 +8,7 @@ import {emailPattern} from '../../utils/patterns';
 
 const Auth = () => {
     const dispatch = useDispatch();
-    const { register, handleSubmit, errors } = useForm({mode: 'onChange'}); // initialize the hook
+    const { register, handleSubmit, errors } = useForm({mode: 'onChange'}); 
     
     const onSubmit = (data:any) => {
         dispatch(login(data));

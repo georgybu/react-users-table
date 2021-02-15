@@ -8,10 +8,11 @@ import {
 import Auth from './pages/Auth/Auth';
 import EditUser from './pages/EditUser/EditUser';
 import HomePage from './pages/HomePage/HomePage';
+
 const Router = () => {
-    const login = useSelector((state: any) => state.login);
+    const { isLoggedIn } = useSelector((state: any) => state.login);
     
-    let routes = !login?.isLoggedIn ? 
+    const routes = (!isLoggedIn && !localStorage.getItem('token')) ? 
         <Switch>
             <Auth />
         </Switch> : 
