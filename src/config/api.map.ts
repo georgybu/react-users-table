@@ -9,5 +9,9 @@ export const apiMap = {
     getUsers: {
         method: 'get',
         url: `${prefix}users`
+    },
+    getUserById: {
+        method: 'get',
+        url: `${prefix}users/<%= id %>`
     }
 }

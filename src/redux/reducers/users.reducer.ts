@@ -1,11 +1,13 @@
 import { UsersData } from './../../interfaces/core.interfaces';
-import { SEARCH_USERS, SET_USERS_DATA, SORT_USERS } from "../constants/users.constants";
+import { SEARCH_USERS, SET_SELECTED_USER_DATA, SET_USERS_DATA, SORT_USERS } from "../constants/users.constants";
 
 const initialState = {
   users: [],
   initialUsers: [],
   sortBy: '',
-  sortDir: ''
+  sortDir: '',
+  selectedUser: {},
+  selectedUserId: null
 }
 
 const users = (state = initialState, action: any) => {
@@ -31,6 +33,13 @@ const users = (state = initialState, action: any) => {
             users: sortedUsers,
             sortDir: sortData.sortDir,
             sortBy: sortData.sortBy
+        }
+    case SET_SELECTED_USER_DATA: 
+        const { user } = action.payload;
+        return {
+            ...state,
+            selectedUser: user,
+            selectedUserId: user.id
         }
     default:
       return state
