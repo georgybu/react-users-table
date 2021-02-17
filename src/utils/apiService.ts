@@ -9,11 +9,13 @@ function api({ method, url, data, params, urlParams }: any) {
     return new Promise((resolve: any, reject: any) => {
         axios({
         method: method as Method,
-        url: getUrl(),
+        url: urlParams ? getUrl() : url,
         data,
         params,
         })
-        .then(resolve)
+        .then((res) => {
+            return resolve(res);
+        })
         .catch((err) => {
             alert(err)
             reject(err)

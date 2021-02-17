@@ -1,5 +1,5 @@
 import { UsersData } from './../../interfaces/core.interfaces';
-import { SEARCH_USERS, SET_SELECTED_USER_DATA, SET_USERS_DATA, SORT_USERS } from "../constants/users.constants";
+import { SEARCH_USERS, SET_SELECTED_USER_DATA, SET_USERS_DATA, SORT_USERS, UPDATE_USER } from "../constants/users.constants";
 
 const initialState = {
   users: [],
@@ -41,6 +41,22 @@ const users = (state = initialState, action: any) => {
             selectedUser: user,
             selectedUserId: user.id
         }
+    case UPDATE_USER: 
+        const { updatedUser } = action.payload;
+        
+        const editedUserIndex: number = state.users.findIndex(
+            (user: UsersData) => user.id === updatedUser.id,
+        );
+
+        return {
+            ...state,
+            selectedUser: updatedUser,
+            users: [
+                ...state.users.slice(0, editedUserIndex),
+                updatedUser,
+                ...state.users.slice(editedUserIndex + 1),
+            ],
+        };
     default:
       return state
   }

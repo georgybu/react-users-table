@@ -3,7 +3,6 @@
     justify-content: center;
     flex-direction: column;
     background-color: gainsboro;
-    border: 1px solid black;
     height: 100%;
 }
 form {
@@ -34,6 +33,11 @@ input {
     resize: vertical;
 }
 
+.btnContainer{
+    display: flex;
+    justify-content: center;
+}
+
 .submitBtn {
     margin-top: 25px;
     background-color: #4CAF50;
@@ -43,4 +47,7 @@ input {
     border-radius: 4px;
     cursor: pointer;
     float: right;
+}
+button:disabled {
+   opacity: 0.5;
 }
