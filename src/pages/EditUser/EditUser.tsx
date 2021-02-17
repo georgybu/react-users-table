@@ -5,16 +5,15 @@ import { useHistory } from 'react-router-dom';
 import { getUserById, updateUserById } from '../../redux/actions/users.actions';
 import styles from './EditUser.module.scss';
 
-const EditUser = (props: any) => {
-    console.log('props:', props);
+const EditUser = () => {
     const dispatch = useDispatch();
     const userData = useSelector((state: any) => state.users.selectedUser);
     const history: any = useHistory();
     const [userDataLocal, setUserDataLocal] = useState<any>({});
     
     useEffect(() => {
-        const userState = history?.location?.state?.user;
-        userState?.id && dispatch(getUserById(userState?.id));
+        const userId = history?.location?.state?.userId;
+        userId && dispatch(getUserById(userId));
     }, [])
 
     useEffect(() => {

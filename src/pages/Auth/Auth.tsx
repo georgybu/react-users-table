@@ -4,12 +4,19 @@ import {isEmpty} from 'lodash';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/login.actions';
 import {emailPattern} from '../../utils/patterns';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 const Auth = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { register, handleSubmit, errors } = useForm({mode: 'onChange'}); 
     
+    useEffect(() => {
+        history.location.pathname !== '/login' && history.push('/login');
+    }, [])
+
     const onSubmit = (data:any) => {
         dispatch(login(data));
     };

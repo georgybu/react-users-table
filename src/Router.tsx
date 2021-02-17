@@ -20,7 +20,9 @@ const Router = () => {
             <Route path="/home" exact>
                 <HomePage />
             </Route>
-            <Route path="/edit/:userId" exact render={(props) => <EditUser {...props}/>} />
+            <Route path="/edit/:userId" exact>
+                <EditUser />
+            </Route>
             <Redirect to="/home" />
         </Switch>
     ;

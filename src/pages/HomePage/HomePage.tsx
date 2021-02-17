@@ -12,12 +12,12 @@ const HomePage = () => {
     useEffect(() => {
         dispatch(getUsersData())
     }, [])
+    
     const onSearchChange = useCallback((val: string) => {
         dispatch(searchUsers(val)); 
     }, []);
 
     const onSortHandler = (obj: {sortBy: string, sortDir: string}) => {
-        console.log(obj);
         dispatch(sortUsers(obj))
     }
 

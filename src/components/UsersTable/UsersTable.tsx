@@ -20,7 +20,7 @@ const UsersTable = ({users, onSort}: UsersTableProps) => {
     const onRowClick = (user: UsersData) => {
         history.push({
             pathname: `/edit/${user.id}`,
-            state: { user: user }
+            state: { userId: user.id }
           })
     }
 
