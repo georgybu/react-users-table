@@ -1,9 +1,12 @@
 import { useHistory } from "react-router-dom";
-import { TableColumn, UsersData } from "../../interfaces/core.interfaces";
+import { SortDirEnum, TableColumn, UsersData } from "../../interfaces/core.interfaces";
 import columnsConfig from "./UsersTable.config";
 import styles from './UsersTable.module.scss';
 import arrUp from '../../assets/icons/arrowUp.png';
 import arrDown from '../../assets/icons/arrowDown.png';
+import EmptyData from "../EmptyData/Empty";
+import { useSelector } from "react-redux";
+import classNames from 'classnames';
 
 interface UsersTableProps {
     users: UsersData[],
@@ -12,7 +15,8 @@ interface UsersTableProps {
 
 const UsersTable = ({users, onSort}: UsersTableProps) => {
     const history = useHistory()
-     
+    const { sortBy, sortDir } = useSelector((state: any) => state.users);
+
     const onRowClick = (user: UsersData) => {
         history.push({
             pathname: `/edit/${user.id}`,
@@ -30,10 +34,16 @@ const UsersTable = ({users, onSort}: UsersTableProps) => {
                             <div className={styles.header}>
                                 <div>{column.title}</div>
                                 {column.isSortable && 
-                                <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    <div className={styles.arrow} onClick={() => onSort({sortBy: column.fieldName, sortDir: 'ASC'})}><img width={10} height={10} src={arrUp}/></div>
-                                    <div className={styles.arrow} onClick={() => onSort({sortBy: column.fieldName, sortDir: 'DESC'})}><img width={10} height={10} src={arrDown}/></div>
-                                </div>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                        <div className={classNames({[styles.selectedArrow]: sortDir === SortDirEnum.ASC && sortBy === column.fieldName}, styles.arrow)} 
+                                            onClick={() => onSort({sortBy: column.fieldName, sortDir: SortDirEnum.ASC})}>
+                                                <img width={10} height={10} src={arrUp}/>
+                                        </div>
+                                        <div className={classNames({[styles.selectedArrow]: sortDir=== SortDirEnum.DESC && sortBy === column.fieldName}, styles.arrow)} 
+                                            onClick={() => onSort({sortBy: column.fieldName, sortDir: SortDirEnum.DESC})}>
+                                                <img width={10} height={10} src={arrDown}/>
+                                        </div>
+                                    </div>
                                 }
                             </div>
                         </th>
@@ -47,7 +57,7 @@ const UsersTable = ({users, onSort}: UsersTableProps) => {
                             <td key={idx}>{user[column.fieldName]}</td>
                             ))}
                         </tr>
-                        )) : 'Loading data...'}
+                        )) : <EmptyData />}
                 </tbody>
             </table>
         </div>

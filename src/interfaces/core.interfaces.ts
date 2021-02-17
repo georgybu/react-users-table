@@ -19,3 +19,8 @@ export interface TableColumn {
     title: string,
     isSortable?: boolean
 }
+
+export enum SortDirEnum {
+    ASC = "ASC",
+    DESC = "DESC"
+}
