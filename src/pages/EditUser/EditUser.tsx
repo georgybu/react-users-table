@@ -45,7 +45,7 @@ const EditUser = (props: any) => {
                     </div>
                     ) 
                 })}
-                <input className={styles.submitBtn} type="submit" />
+                <input className={styles.submitBtn} type="submit" value="Update User"/>
             </form>
         </div>
     )

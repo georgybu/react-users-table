@@ -2,7 +2,6 @@ import { UsersData } from './../../interfaces/core.interfaces';
 import { apiMap } from './../../config/api.map';
 import { SEARCH_USERS, SET_USERS_DATA, SORT_USERS, SET_SELECTED_USER_DATA } from "../constants/users.constants";
 import api from '../../utils/apiService';
-import axios from 'axios';
 
 export const setUsersData = (data: any) => ({
     type: SET_USERS_DATA,
@@ -41,14 +40,18 @@ export const getUsersData = () => (dispatch: any) => {
     }).catch(err => console.log(err))
 }
 
-export const getUserById = (id: any) => (dispatch: any) => {
-    const { url } = apiMap.getUsers;
-    const urlReq = `${url}/${id}`;
-    axios.get(urlReq)
-        .then((res: any) => {
+export const getUserById = (id: number) => (dispatch: any) => {
+    const { method, url } = apiMap.getUserById;
+    api({
+      method,
+      url,
+      urlParams: {id}
+    }).then((res: any) => {
         const data = res.data;
         dispatch(setSelectedUser(data))
     }).catch(err => console.log(err))
 }
+
+// export const updateUserById = (id: number) => {}
 
 

@@ -1,5 +1,6 @@
-const url = 'https://test-api-server.herokuapp.com'
-const prefix = `${url}/`
+export const url = 'https://test-api-server.herokuapp.com'
+
+export const prefix = `${url}/`
 
 export const apiMap = {
     login: {
@@ -12,6 +13,10 @@ export const apiMap = {
     },
     getUserById: {
         method: 'get',
+        url: `${prefix}users/<%= id %>`
+    },
+    updateUser: {
+        method: 'post',
         url: `${prefix}users/<%= id %>`
     }
 }

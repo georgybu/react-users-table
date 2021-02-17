@@ -46,13 +46,13 @@ const UsersTable = ({users, onSort}: UsersTableProps) => {
                     </tr>
                 </thead>
                 <tbody >
-                        {(users || []).map((user: any) => (
+                        {users.length ? users.map((user: any) => (
                         <tr key={user.id} onClick={() => onRowClick(user)}>
                             {columnsConfig.map((column: TableColumn, idx: number) => (
                             <td key={idx}>{user[column.fieldName]}</td>
                             ))}
                         </tr>
-                        ))}
+                        )) : 'No data'}
                 </tbody>
             </table>
         </div>
