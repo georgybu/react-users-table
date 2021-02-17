@@ -20,11 +20,6 @@ const UsersTable = ({users, onSort}: UsersTableProps) => {
           })
     }
 
-    // const onSortHandler = (sortBy: string, sortDir: string) => {
-    //     console.log({sortBy, sortDir});
-    //     onSort({sortBy, sortDir});
-    // }
-
     return (
         <div className={styles.container}>
             <table className={styles.table}>
@@ -32,7 +27,7 @@ const UsersTable = ({users, onSort}: UsersTableProps) => {
                     <tr>
                     {columnsConfig.map((column: TableColumn, idx: number) => (
                         <th key={idx}>
-                            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                            <div className={styles.header}>
                                 <div>{column.title}</div>
                                 {column.isSortable && 
                                 <div style={{display: 'flex', flexDirection: 'column'}}>
@@ -52,7 +47,7 @@ const UsersTable = ({users, onSort}: UsersTableProps) => {
                             <td key={idx}>{user[column.fieldName]}</td>
                             ))}
                         </tr>
-                        )) : 'No data'}
+                        )) : 'Loading data...'}
                 </tbody>
             </table>
         </div>
