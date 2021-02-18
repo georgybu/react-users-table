@@ -1,42 +1,50 @@
-.container{
-    margin-top: 15px;
-    width: 100%;
+.container {
+  margin-top: 15px;
+  width: 100%;
 }
 
 tbody {
-    display: block;
-    height: 600px;
-    overflow: auto;
+  display: block;
+  height: 600px;
+  overflow: auto;
 }
+
 thead, tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;/* even columns width , fix width of table too*/
-    text-align: center;
-    border-bottom: 1px solid grey;
-    :hover {
-        cursor: pointer;
-    }
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* even columns width , fix width of table too*/
+  text-align: center;
+  border-bottom: 1px solid grey;
+
+  :hover {
+    cursor: pointer;
+  }
 }
+
 thead {
-    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+  width: calc(100% - 1em) /* scrollbar is average 1em/16px width, remove it from thead width */
 }
+
 table {
-    width: 100%;
+  width: 100%;
 }
-.arrow{
-    display: flex;
-    &:hover {
-        cursor: pointer;
-    }
+
+.arrow {
+  display: flex;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
+
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .selectedArrow {
-    background-color: red;
+  background-color: red;
 }
 
 

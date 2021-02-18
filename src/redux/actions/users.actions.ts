@@ -1,6 +1,12 @@
-import { UsersData } from './../../interfaces/core.interfaces';
-import { apiMap } from './../../config/api.map';
-import { SEARCH_USERS, SET_USERS_DATA, SORT_USERS, SET_SELECTED_USER_DATA, UPDATE_USER } from "../constants/users.constants";
+import {UsersData} from './../../interfaces/core.interfaces';
+import {apiMap} from './../../config/api.map';
+import {
+    SEARCH_USERS,
+    SET_SELECTED_USER_DATA,
+    SET_USERS_DATA,
+    SORT_USERS,
+    UPDATE_USER
+} from "../constants/users.constants";
 import api from '../../utils/apiService';
 
 export const setUsersData = (data: any) => ({
@@ -15,7 +21,7 @@ export const searchUsers = (query: string) => ({
     },
 })
 
-export const sortUsers = (sortData: {sortBy: string, sortDir: string}) => ({
+export const sortUsers = (sortData: { sortBy: string, sortDir: string }) => ({
     type: SORT_USERS,
     payload: {
         sortData
@@ -37,10 +43,10 @@ export const setSelectedUser = (user: UsersData) => ({
 })
 
 export const getUsersData = () => (dispatch: any) => {
-    const { method, url } = apiMap.getUsers;
+    const {method, url} = apiMap.getUsers;
     api({
-      method,
-      url,
+        method,
+        url,
     }).then((res: any) => {
         const data = res.data;
         dispatch(setUsersData(data))
@@ -48,11 +54,11 @@ export const getUsersData = () => (dispatch: any) => {
 }
 
 export const getUserById = (id: number) => (dispatch: any) => {
-    const { method, url } = apiMap.getUserById;
+    const {method, url} = apiMap.getUserById;
     api({
-      method,
-      url,
-      urlParams: { id }
+        method,
+        url,
+        urlParams: {id}
     }).then((res: any) => {
         const data = res.data;
         dispatch(setSelectedUser(data))
@@ -61,12 +67,12 @@ export const getUserById = (id: number) => (dispatch: any) => {
 
 export const updateUserById = (userData: UsersData, userDataId: number) => (dispatch: any) => {
     console.log(userData, userDataId);
-    const { method, url } = apiMap.updateUser;
+    const {method, url} = apiMap.updateUser;
     api({
-      method,
-      url,
-      urlParams: { id: userDataId },
-      data: { ...userData }
+        method,
+        url,
+        urlParams: {id: userDataId},
+        data: {...userData}
     }).then((res: any) => {
         const data = res.data;
         dispatch(setUpdatedUser(data))

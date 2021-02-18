@@ -1,8 +1,8 @@
-import { isEmpty, isEqual } from 'lodash';
-import { useEffect, useMemo, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { getUserById, updateUserById } from '../../redux/actions/users.actions';
+import {isEmpty, isEqual} from 'lodash';
+import {useEffect, useMemo, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import {getUserById, updateUserById} from '../../redux/actions/users.actions';
 import styles from './EditUser.module.scss';
 
 const EditUser = () => {
@@ -10,7 +10,7 @@ const EditUser = () => {
     const userData = useSelector((state: any) => state.users.selectedUser);
     const history: any = useHistory();
     const [userDataLocal, setUserDataLocal] = useState<any>({});
-    
+
     useEffect(() => {
         const userId = history?.location?.state?.userId;
         userId && dispatch(getUserById(userId));
@@ -27,30 +27,32 @@ const EditUser = () => {
     const onChangeInputHandler = (e: any) => {
         setUserDataLocal({...userDataLocal, [e.target.name]: e.target.value});
     }
-    
+
     const updateUser = () => {
-        if(!isEmpty(userDataLocal)){
+        if (!isEmpty(userDataLocal)) {
             dispatch(updateUserById(userDataLocal, userData.id));
         }
     }
 
-    const checkIsDisabled = useMemo(() => isEqual(userData,userDataLocal), [userData, userDataLocal]);
+    const checkIsDisabled = useMemo(() => isEqual(userData, userDataLocal), [userData, userDataLocal]);
 
     return (
         <div className={styles.container}>
             {Object.entries(userDataLocal).map(([key, value]: any, idx) => {
                 return (
-                <div key={idx} className={styles.row}>
-                    <label htmlFor={key}>{key.toUpperCase()}</label>
-                    <input id={key}
-                        name={key}
-                        value={value}
-                        onChange={(e) => onChangeInputHandler(e)} />
-                </div>
-                ) 
+                    <div key={idx} className={styles.row}>
+                        <label htmlFor={key}>{key.toUpperCase()}</label>
+                        <input id={key}
+                               name={key}
+                               value={value}
+                               onChange={(e) => onChangeInputHandler(e)}/>
+                    </div>
+                )
             })}
             <div className={styles.btnContainer}>
-                <button className={styles.submitBtn} disabled={checkIsDisabled} onClick={()=> updateUser()}>Update User</button>
+                <button className={styles.submitBtn} disabled={checkIsDisabled} onClick={() => updateUser()}>Update
+                    User
+                </button>
             </div>
         </div>
     )

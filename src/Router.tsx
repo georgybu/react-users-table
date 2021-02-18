@@ -1,36 +1,31 @@
-import { useSelector } from 'react-redux';
-import {
-    BrowserRouter,
-    Route,
-    Redirect,
-    Switch
-} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Auth from './pages/Auth/Auth';
 import EditUser from './pages/EditUser/EditUser';
 import HomePage from './pages/HomePage/HomePage';
 
 const Router = () => {
-    const { isLoggedIn } = useSelector((state: any) => state.login);
-    
-    const routes = (!isLoggedIn && !localStorage.getItem('token')) ? 
+    const {isLoggedIn} = useSelector((state: any) => state.login);
+
+    const routes = (!isLoggedIn && !localStorage.getItem('token')) ?
         <Switch>
-            <Auth />
-        </Switch> : 
+            <Auth/>
+        </Switch> :
         <Switch>
             <Route path="/home" exact>
-                <HomePage />
+                <HomePage/>
             </Route>
             <Route path="/edit/:userId" exact>
-                <EditUser />
+                <EditUser/>
             </Route>
-            <Redirect to="/home" />
+            <Redirect to="/home"/>
         </Switch>
     ;
-    
+
     return (
         <BrowserRouter>
             <main style={{width: '100%', height: '100%'}}>
-               {routes}
+                {routes}
             </main>
         </BrowserRouter>
     )
